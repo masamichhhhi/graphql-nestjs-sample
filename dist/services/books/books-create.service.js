@@ -8,28 +8,27 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.AppController = void 0;
+exports.BooksCreateService = void 0;
 const common_1 = require("@nestjs/common");
-const app_service_1 = require("./app.service");
-let AppController = class AppController {
-    constructor(appService) {
-        this.appService = appService;
+const book_1 = require("../../books/book");
+const prisma_service_1 = require("../../prisma.service");
+const base_service_1 = require("../base.service");
+let BooksCreateService = class BooksCreateService extends base_service_1.BaseService {
+    constructor(prisma) {
+        super();
+        this.prisma = prisma;
     }
-    getHello() {
-        return this.appService.getHello();
+    async handle(request) {
+        const book = this.prisma.book.create({
+            data: Object.assign({}, request),
+        });
+        return book;
     }
 };
-__decorate([
-    (0, common_1.Get)(),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", []),
-    __metadata("design:returntype", String)
-], AppController.prototype, "getHello", null);
-AppController = __decorate([
-    (0, common_1.Controller)(),
-    __metadata("design:paramtypes", [typeof (_a = typeof app_service_1.AppService !== "undefined" && app_service_1.AppService) === "function" ? _a : Object])
-], AppController);
-exports.AppController = AppController;
-//# sourceMappingURL=app.controller.js.map
+BooksCreateService = __decorate([
+    (0, common_1.Injectable)(),
+    __metadata("design:paramtypes", [prisma_service_1.PrismaService])
+], BooksCreateService);
+exports.BooksCreateService = BooksCreateService;
+//# sourceMappingURL=books-create.service.js.map

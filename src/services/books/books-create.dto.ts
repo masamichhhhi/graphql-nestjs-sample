@@ -1,8 +1,9 @@
+import { BaseRequest, BaseResponse } from '../base.dto';
 import { Field, InputType, Int } from '@nestjs/graphql';
 import { Max, MaxLength, Min } from 'class-validator';
 
 @InputType()
-export class NewBookInput {
+export class BooksCreateRequest {
   @Field()
   @MaxLength(30)
   title: string;
@@ -15,3 +16,5 @@ export class NewBookInput {
   @Field((type) => String)
   author: string;
 }
+
+export class BooksCreateResponse extends BaseResponse {}

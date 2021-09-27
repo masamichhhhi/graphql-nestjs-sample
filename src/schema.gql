@@ -17,15 +17,13 @@ scalar DateTime
 
 type Query {
   books: [Book!]!
-  getBook(id: Int!): Book!
 }
 
 type Mutation {
-  addBook(newBook: NewBookInput!): Book!
-  removeBook(id: Int!): Boolean!
+  addBook(newBook: BooksCreateRequest!): Book!
 }
 
-input NewBookInput {
+input BooksCreateRequest {
   title: String!
   price: Int!
   author: String!

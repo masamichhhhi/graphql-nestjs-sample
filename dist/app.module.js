@@ -10,9 +10,9 @@ exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const graphql_1 = require("@nestjs/graphql");
 const path_1 = require("path");
-const app_controller_1 = require("./app.controller");
-const app_service_1 = require("./app.service");
-const books_module_1 = require("./books/books.module");
+const prisma_service_1 = require("./prisma.service");
+const services_1 = require("./services");
+const resolvers_1 = require("./resolvers");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -21,10 +21,8 @@ AppModule = __decorate([
             graphql_1.GraphQLModule.forRoot({
                 autoSchemaFile: (0, path_1.join)(process.cwd(), 'src/schema.gql'),
             }),
-            books_module_1.BooksModule,
         ],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        providers: [...resolvers_1.resolvers, ...services_1.services, prisma_service_1.PrismaService],
     })
 ], AppModule);
 exports.AppModule = AppModule;

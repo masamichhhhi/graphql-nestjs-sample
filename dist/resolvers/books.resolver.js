@@ -13,30 +13,19 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BooksResolver = void 0;
-const common_1 = require("@nestjs/common");
 const graphql_1 = require("@nestjs/graphql");
+const books_create_dto_1 = require("../services/books/books-create.dto");
+const books_create_service_1 = require("../services/books/books-create.service");
 const book_1 = require("../books/book");
-const books_service_1 = require("../books/books.service");
-const newBook_input_1 = require("../books/dto/newBook.input");
 let BooksResolver = class BooksResolver {
-    constructor(bookService) {
-        this.bookService = bookService;
+    constructor(bookCreateService) {
+        this.bookCreateService = bookCreateService;
     }
     books() {
-        return this.bookService.findAll();
-    }
-    async getBook(id) {
-        const book = await this.bookService.findOneById(id);
-        if (!book) {
-            throw new common_1.NotFoundException(id);
-        }
-        return book;
+        return Promise.resolve([]);
     }
     addBook(newBook) {
-        return this.bookService.create(newBook);
-    }
-    async removeBook(id) {
-        return this.bookService.remove(id);
+        return this.bookCreateService.handle(newBook);
     }
 };
 __decorate([
@@ -46,29 +35,15 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BooksResolver.prototype, "books", null);
 __decorate([
-    (0, graphql_1.Query)((returns) => book_1.Book),
-    __param(0, (0, graphql_1.Args)({ name: 'id', type: () => graphql_1.Int })),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Promise)
-], BooksResolver.prototype, "getBook", null);
-__decorate([
     (0, graphql_1.Mutation)((returns) => book_1.Book),
     __param(0, (0, graphql_1.Args)('newBook')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [newBook_input_1.NewBookInput]),
+    __metadata("design:paramtypes", [books_create_dto_1.BooksCreateRequest]),
     __metadata("design:returntype", Promise)
 ], BooksResolver.prototype, "addBook", null);
-__decorate([
-    (0, graphql_1.Mutation)((returns) => Boolean),
-    __param(0, (0, graphql_1.Args)({ name: 'id', type: () => graphql_1.Int })),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", Promise)
-], BooksResolver.prototype, "removeBook", null);
 BooksResolver = __decorate([
     (0, graphql_1.Resolver)((of) => book_1.Book),
-    __metadata("design:paramtypes", [books_service_1.BooksService])
+    __metadata("design:paramtypes", [books_create_service_1.BooksCreateService])
 ], BooksResolver);
 exports.BooksResolver = BooksResolver;
 //# sourceMappingURL=books.resolver.js.map

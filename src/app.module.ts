@@ -1,10 +1,12 @@
 import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { join } from 'path';
-import { BooksResolver } from './resolvers/books.resolver';
 import { PrismaService } from './prisma.service';
 import { services } from './services';
 import { resolvers } from './resolvers';
+import { repositories } from './infrastructure';
+import { BooksRepositoryImpl } from './infrastructure/BooksRepositoryImpl';
+import { BooksCreateService } from './services/books/books-create.service';
 
 @Module({
   imports: [
@@ -12,6 +14,11 @@ import { resolvers } from './resolvers';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
   ],
-  providers: [...resolvers, ...services, PrismaService],
+  providers: [
+    ...resolvers,
+    BooksCreateService,
+    BooksRepositoryImpl,
+    PrismaService,
+  ],
 })
 export class AppModule {}

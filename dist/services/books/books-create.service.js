@@ -16,6 +16,7 @@ exports.BooksCreateService = void 0;
 const common_1 = require("@nestjs/common");
 const book_1 = require("../../books/book");
 const IBooksRepository_1 = require("../../domain/repository/IBooksRepository");
+const BooksRepositoryImpl_1 = require("../../infrastructure/BooksRepositoryImpl");
 const prisma_service_1 = require("../../prisma.service");
 const base_service_1 = require("../base.service");
 let BooksCreateService = class BooksCreateService extends base_service_1.BaseService {
@@ -30,7 +31,7 @@ let BooksCreateService = class BooksCreateService extends base_service_1.BaseSer
 };
 BooksCreateService = __decorate([
     (0, common_1.Injectable)(),
-    __param(0, (0, common_1.Inject)('BooksRepositoryImpl')),
+    __param(0, (0, common_1.Inject)('IBooksRepository')),
     __metadata("design:paramtypes", [Object])
 ], BooksCreateService);
 exports.BooksCreateService = BooksCreateService;

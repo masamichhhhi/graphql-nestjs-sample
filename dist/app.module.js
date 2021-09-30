@@ -11,9 +11,9 @@ const common_1 = require("@nestjs/common");
 const graphql_1 = require("@nestjs/graphql");
 const path_1 = require("path");
 const prisma_service_1 = require("./prisma.service");
+const services_1 = require("./services");
 const resolvers_1 = require("./resolvers");
-const BooksRepositoryImpl_1 = require("./infrastructure/BooksRepositoryImpl");
-const books_create_service_1 = require("./services/books/books-create.service");
+const infrastructure_1 = require("./infrastructure");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -23,12 +23,7 @@ AppModule = __decorate([
                 autoSchemaFile: (0, path_1.join)(process.cwd(), 'src/schema.gql'),
             }),
         ],
-        providers: [
-            ...resolvers_1.resolvers,
-            books_create_service_1.BooksCreateService,
-            BooksRepositoryImpl_1.BooksRepositoryImpl,
-            prisma_service_1.PrismaService,
-        ],
+        providers: [...resolvers_1.resolvers, ...services_1.services, ...infrastructure_1.repositories, prisma_service_1.PrismaService],
     })
 ], AppModule);
 exports.AppModule = AppModule;

@@ -1,3 +1,8 @@
 import { BooksRepositoryImpl } from './BooksRepositoryImpl';
 
-export const repositories = [BooksRepositoryImpl];
+export const repositories = [
+  {
+    provide: 'IBooksRepository',
+    useClass: BooksRepositoryImpl,
+  },
+];

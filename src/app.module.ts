@@ -14,11 +14,6 @@ import { BooksCreateService } from './services/books/books-create.service';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
     }),
   ],
-  providers: [
-    ...resolvers,
-    BooksCreateService,
-    BooksRepositoryImpl,
-    PrismaService,
-  ],
+  providers: [...resolvers, ...services, ...repositories, PrismaService],
 })
 export class AppModule {}

@@ -28,6 +28,9 @@ GraphQLをNest.js + Prismaで実装
 ↓のprismaバージョン  
 https://zenn.dev/azukiazusa/articles/e84be9735d357e
 
+### 依存関係  
+relosver -> service -> domain <- infrastructure
+
 ## Installation
 
 ```bash
